@@ -18,10 +18,8 @@
                 <span class="app-icon"></span>
                 <p class="app-name">Code Storm</p>
                 <div class="search-wrapper">
-                    <input class="search-input" type="text" placeholder="Buscar">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
-                        <defs></defs>
+                    <input id="search-input" class="search-input" type="text" placeholder="Buscar">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="M21 21l-4.35-4.35"></path>
                     </svg>
@@ -117,11 +115,11 @@
                     <p class="time" id="current-date"></p>
                 </div>
                 <!-------- CARRUSEL --------->
-                <div class="slider" reverse="true" style="
-                 --width: 400px;
-                 --height: 400px; /* Asegúrate de que el height sea más razonable */
-                 --quantity: 6;
-                 ">
+                <div class="project-boxes jsGridView">
+                    <div class="slider" reverse="true" style="
+                    --width: 400px;
+                    --height: 400px; /* Asegúrate de que el height sea más razonable */
+                    --quantity: 6;">
                     <div class="list">
                         <div class="item" style="--position: 1"><img src="images/slider1_1.png" alt=""></div>
                         <div class="item" style="--position: 2"><img src="images/slider1_2.png" alt=""></div>
@@ -131,6 +129,7 @@
                         <div class="item" style="--position: 6"><img src="images/slider1_6.png" alt=""></div>
                     </div>
                 </div>
+                
                 <div class="container">
                     <h1>Mapa de Villavicencio con tráfico y condiciones del clima</h1>
                     <div id="map"></div>
@@ -142,7 +141,11 @@
                         <p><strong>Viento:</strong> <span id="wind">--</span> m/s</p>
                     </div>
                 </div>
+                </div>
+            
+                
             </div>
+            
 
             <!--FIN DEL CONTENEDOR IZQUIERDO-->
 

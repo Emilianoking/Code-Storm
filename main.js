@@ -93,3 +93,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Barra de busqueda
+document.getElementById('search-input').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase().trim();  
+    const projectSection = document.querySelector('.projects-section');  
+    const elementsToSearch = projectSection.querySelectorAll('p, h1, h2'); 
+
+    elementsToSearch.forEach(element => {
+        const originalText = element.textContent; 
+        element.innerHTML = originalText;
+
+        if (searchValue !== '') {
+            const regex = new RegExp(`(${searchValue})`, 'gi');  
+            const highlightedText = originalText.replace(regex, '<mark>$1</mark>');  
+            element.innerHTML = highlightedText;  
+        }
+    });
+});

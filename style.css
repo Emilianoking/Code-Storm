@@ -177,6 +177,11 @@ a {
 .dark .search-wrapper {
     box-shadow: none;
 }
+mark {
+    background-color: yellow;
+    color: black;
+}
+
 
 .search-input {
     border: none;
@@ -280,15 +285,16 @@ a {
 }
 
 .projects-section {
-    flex: 2;
-    background-color: var(--projects-section);
-    border-radius: 32px;
-    padding: 32px 32px 0 32px;
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    flex: 2; /* Ocupa dos partes del espacio disponible */
+    background-color: var(--projects-section); /* Color de fondo */
+    border-radius: 32px; /* Bordes redondeados */
+    padding: 32px; /* Espaciado interno */
+    overflow: auto; /* Permite que aparezca la barra de desplazamiento si es necesario */
+    max-height: 500px; /* Establece una altura máxima para la sección */
+    display: flex; 
+    flex-direction: column; 
 }
+
 
 .projects-section-line {
     display: flex;
