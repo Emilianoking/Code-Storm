@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     trafficLayer.addTo(map);
 
     // Llamada a la API del clima de OpenWeather
-    var weatherApiKey = '981b94264e5a54fe9a8ab90332271550'; // Reemplaza con tu clave de OpenWeather
+    var weatherApiKey = '981b94264e5a54fe9a8ab90332271550'; 
     var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=4.1433&lon=-73.6376&units=metric&appid=${weatherApiKey}&lang=es`;
 
     fetch(weatherUrl)
@@ -74,17 +74,44 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            // Extraer información del clima
-            var description = data.weather[0].description;
-            var temp = data.main.temp;
-            var humidity = data.main.humidity;
-            var wind = data.wind.speed;
+            // Guardar los datos del clima para usarlos en el switch
+            var weatherData = {
+                description: data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1),
+                temp: data.main.temp,
+                humidity: data.main.humidity,
+                wind: data.wind.speed
+            };
 
-            // Actualizar el contenido de la pestaña de clima
-            document.getElementById('description').textContent = description.charAt(0).toUpperCase() + description.slice(1);
-            document.getElementById('temp').textContent = temp;
-            document.getElementById('humidity').textContent = humidity;
-            document.getElementById('wind').textContent = wind;
+            // Añadir evento change al switch
+            document.getElementById('weather-switch').addEventListener('change', function() {
+                var weatherWidget = document.getElementById('weather');
+                // Mostrar u ocultar el contenedor del clima según el estado del switch
+                weatherWidget.style.display = this.checked ? 'block' : 'none';
+
+                // Actualizar el contenido del clima solo cuando se muestra
+                if (this.checked) {
+                    document.getElementById('description').textContent = weatherData.description;
+                    document.getElementById('temp').textContent = weatherData.temp;
+                    document.getElementById('humidity').textContent = weatherData.humidity;
+                    document.getElementById('wind').textContent = weatherData.wind;
+                }
+
+                // Mover el sol y la nube según el estado del interruptor
+                var sun = document.querySelector('.sun');
+                var cloud = document.querySelector('.cloud');
+
+                if (this.checked) {
+                    sun.style.opacity = '1'; 
+                    sun.style.visibility = 'visible'; 
+                    cloud.style.opacity = '0'; 
+                    cloud.style.visibility = 'hidden'; 
+                } else {
+                    sun.style.opacity = '0'; 
+                    sun.style.visibility = 'hidden'; 
+                    cloud.style.opacity = '1'; 
+                    cloud.style.visibility = 'visible';
+                }
+            });
         })
         .catch(error => {
             console.error(error);
@@ -93,20 +120,35 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
 // Barra de busqueda
-document.getElementById('search-input').addEventListener('input', function() {
+document.getElementById('search-input').addEventListener('input', function() { 
     const searchValue = this.value.toLowerCase().trim();  
     const projectSection = document.querySelector('.projects-section');  
     const elementsToSearch = projectSection.querySelectorAll('p, h1, h2'); 
 
+    // Variable para guardar la primera coincidencia
+    let firstMatch = null;
+
     elementsToSearch.forEach(element => {
         const originalText = element.textContent; 
-        element.innerHTML = originalText;
+        element.innerHTML = originalText; 
 
         if (searchValue !== '') {
             const regex = new RegExp(`(${searchValue})`, 'gi');  
             const highlightedText = originalText.replace(regex, '<mark>$1</mark>');  
-            element.innerHTML = highlightedText;  
+            element.innerHTML = highlightedText; 
+
+            // Comprobar si hay coincidencias
+            if (highlightedText.includes('<mark>')) {
+                if (!firstMatch) {
+                    firstMatch = element; 
+                }
+            }
         }
     });
+    if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 });

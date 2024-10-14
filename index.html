@@ -116,24 +116,32 @@
                 </div>
                 <!-------- CARRUSEL --------->
                 <div class="project-boxes jsGridView">
+                    <h1>Movilidad Villavicencio</h1>
                     <div class="slider" reverse="true" style="
                     --width: 400px;
                     --height: 400px; /* Asegúrate de que el height sea más razonable */
                     --quantity: 6;">
                     <div class="list">
                         <div class="item" style="--position: 1"><img src="images/slider1_1.png" alt=""></div>
-                        <div class="item" style="--position: 2"><img src="images/slider1_2.png" alt=""></div>
-                        <div class="item" style="--position: 3"><img src="images/slider1_3.png" alt=""></div>
-                        <div class="item" style="--position: 4"><img src="images/slider1_4.png" alt=""></div>
-                        <div class="item" style="--position: 5"><img src="images/slider1_5.png" alt=""></div>
-                        <div class="item" style="--position: 6"><img src="images/slider1_6.png" alt=""></div>
+                        <div class="item" style="--position: 2"><img src="images/slider1_2.jpg" alt=""></div>
+                        <div class="item" style="--position: 3"><img src="images/slider1_3.jpg" alt=""></div>
+                        <div class="item" style="--position: 4"><img src="images/slider1_4.jpeg" alt=""></div>
+                        <div class="item" style="--position: 5"><img src="images/slider1_5.jpeg" alt=""></div>
+                        <div class="item" style="--position: 6"><img src="images/slider1_6.jpeg" alt=""></div>
                     </div>
                 </div>
-                
                 <div class="container">
                     <h1>Mapa de Villavicencio con tráfico y condiciones del clima</h1>
                     <div id="map">
-                        <div class="weather-widget" id="weather">
+                        <!-- Interruptor para mostrar el clima, dentro del mapa -->
+                        <label class="custom-switch" >
+                            <input type="checkbox" id="weather-switch">
+                            <span class="custom-slider">
+                                <span class="cloud">☁️</span> 
+                                <span class="sun">☀️</span> 
+                            </span>
+                        </label>
+                        <div class="weather-widget" id="weather" style="display: none;">
                             <h2>Clima en Villavicencio</h2>
                             <p id="description">Cargando...</p>
                             <p><strong>Temperatura:</strong> <span id="temp">--</span> °C</p>
@@ -141,16 +149,13 @@
                             <p><strong>Viento:</strong> <span id="wind">--</span> m/s</p>
                         </div>
                     </div>
-                    
                 </div>
-                </div>
-            
                 
+                </div>
             </div>
             
 
-            <!--FIN DEL CONTENEDOR IZQUIERDO-->
-
+          
 
             <div class="messages-section">
                 <button class="messages-close">
