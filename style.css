@@ -285,12 +285,12 @@ mark {
 }
 
 .projects-section {
-    flex: 2; /* Ocupa dos partes del espacio disponible */
-    background-color: var(--projects-section); /* Color de fondo */
-    border-radius: 32px; /* Bordes redondeados */
-    padding: 32px; /* Espaciado interno */
-    overflow: auto; /* Permite que aparezca la barra de desplazamiento si es necesario */
-    max-height: 500px; /* Establece una altura máxima para la sección */
+    flex: 2; 
+    background-color: var(--projects-section);
+    border-radius: 32px; 
+    padding: 32px; 
+    overflow: auto;
+    max-height: 500px; 
     display: flex; 
     flex-direction: column; 
 }
@@ -1003,20 +1003,19 @@ mark {
 }
 
 #map {
-    height: 300px; 
+    height: 400px; 
     width: 95%;   
     border-radius: 12px; 
     margin-top: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
-    position: relative; /* Asegúrate de que el mapa también tenga un contexto de apilamiento */
-    z-index: 1; /* Z-index menor que el del carrusel */
+    position: relative; 
+    z-index: 1; 
 }
 
 /* Pestaña del clima */
 .weather-widget {
     position: absolute;
-    left: 10%;
-    right: 10px;
+    left: 0%;
     width: 200px;
     padding: 10px;
     background-color: #ffffff;
@@ -1025,7 +1024,7 @@ mark {
     font-family: Arial, sans-serif;
     z-index: 1000;
     text-align: center;
-    top: 70%; 
+    top: 64%; 
 }
 
 .weather-widget h2 {
