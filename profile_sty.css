@@ -960,6 +960,7 @@ textarea {
 
 .container {
   position: relative;
+  margin-top: -50px;
   width: 100%;
   min-height: 100vh;
   padding: 2rem;
@@ -1139,15 +1140,15 @@ textarea.input-veh {
   z-index: 500;
 }
 
-.input-container-veh span:before,
-.input-container-veh span:after {
+.input-container span:before,
+.input-container span:after {
   content: "";
   position: absolute;
   width: 10%;
   opacity: 0;
   transition: 0.3s;
   height: 5px;
-  background-color: #c3cff4;  /*Color palabara que sube*/
+  background-color: #c3cff4;   /*Color palabara que sube*/
   top: 50%;
   transform: translateY(-50%);
 }
@@ -1303,6 +1304,48 @@ textarea.input-veh {
   transform: translate(181%, 11%);
   opacity: 0.2;
 }
+
+/* Estilos para los select*/
+.input {
+    width: 100%;
+    border: 2px solid #fafafa;
+    border-radius: 25px;
+    background-color: #2f2560;
+    color: #fafafa; 
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: 0.3s;
+  }
+  .input-veh {
+    width: 100%;
+    border: 2px solid #fafafa;
+    border-radius: 25px;
+    background-color: #c3cff4; 
+    color: #2f2560; 
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: 0.3s;
+  }
+  
+  .input:hover,
+  .input-veh:hover {
+    border-color: #146292; 
+  }
+  
+  .input:focus,
+  .input-veh:focus {
+    border-color: #146292;
+    outline: none; 
+  }
+  
+  .input option,
+  .input-veh option {
+    background-color: inherit; 
+    color: inherit;
+  }
+
 
 @media (max-width: 850px) {
   .form {
