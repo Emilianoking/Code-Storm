@@ -293,7 +293,11 @@ mark {
     border-radius: 32px; 
     padding: 32px; 
     overflow: auto;
+<<<<<<< HEAD
     max-height: 500px; 
+=======
+    max-height: auto; 
+>>>>>>> 6ac5817 (add calendar)
     display: flex; 
     flex-direction: column; 
 }
@@ -1141,3 +1145,103 @@ mark {
 .custom-switch input:checked + .custom-slider .cloud {
     left: 30px; 
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+/* CALENDAR SECCION */
+
+.cardsCalendario{
+    display: flex;
+    width: 100%;
+    padding: 40px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar {
+    width: 350px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.calendar-header h2 {
+    margin: 0;
+}
+
+.calendar-body {
+    padding: 20px;
+}
+
+.calendar-body .weekdays {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.calendar-body .days {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calendar-body .days div {
+    width: 14.2%;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease;
+    border-radius: 50%;
+}
+
+.calendar-body .days div:hover {
+    background-color: #e0e0e0;
+}
+
+/* Día actual con borde y relleno transparente */
+.calendar-body .days div.today {
+    border: 2px solid #4CAF50;
+    background-color: transparent;
+    color: #4CAF50;
+}
+
+/* Día seleccionado con fondo lleno */
+.calendar-body .days div.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.calendar-controls button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.calendar-controls button:hover {
+    background-color: #45a049;
+}
+>>>>>>> 6ac5817 (add calendar)

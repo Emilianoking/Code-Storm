@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     <!DOCTYPE html>
     <html lang="en">
 
@@ -117,6 +118,129 @@
                     <div class="project-boxes jsGridView">
                         <h1>Movilidad Villavicencio</h1>
                         <div class="slider" reverse="true" style="
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Strom</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <div class="app-header">
+            <div class="app-header-left">
+                <span class="app-icon"></span>
+                <p class="app-name">Code Storm</p>
+                <div class="search-wrapper">
+                    <input id="search-input" class="search-input" type="text" placeholder="Buscar">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="app-header-right">
+                <button class="mode-switch" title="Switch Theme">
+                    <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+                        <defs></defs>
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="add-btn" title="Add New Project">
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-plus">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                </button>
+                <button class="notification-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-bell">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                </button>
+                <button class="profile-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 19 19">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    <span>ADMIN</span>
+                </button>
+            </div>
+            <button class="messages-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-message-circle">
+                    <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+            </button>
+        </div>
+        <div class="app-content">
+            <div class="app-sidebar">
+                <a href="" class="app-sidebar-link active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-home">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                </a>
+                <a href="profile.html" class="app-sidebar-link">
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="feather feather-user" viewBox="0 0 24 24">
+                        <path
+                            d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5z" />
+                    </svg>
+                </a>
+                <a href="" class="app-sidebar-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-calendar">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                </a>
+                <a href="" class="app-sidebar-link">
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="feather feather-settings" viewBox="0 0 24 24">
+                        <defs />
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                    </svg>
+                </a>
+            </div>
+
+            <!--INICIO DEL CONTENEDOR IZQUIERDO-->
+            <div class="projects-section">
+                <div class="projects-section-header">
+                    <p>HOME</p>
+                    <p class="time" id="current-date"></p>
+                </div>
+                <!-------- CARRUSEL --------->
+                <div class="project-boxes jsGridView">
+                    <h1>Movilidad Villavicencio</h1>
+                    <div class="slider" reverse="true" style="
+>>>>>>> 6ac5817 (add calendar)
                         --width: 400px;
                         --height: 400px; /* Asegúrate de que el height sea más razonable */
                         --quantity: 6;">
@@ -133,11 +257,19 @@
                         <h1>Mapa de Villavicencio con tráfico y condiciones del clima</h1>
                         <div id="map">
                             <!-- Interruptor para mostrar el clima, dentro del mapa -->
+<<<<<<< HEAD
                             <label class="custom-switch" >
                                 <input type="checkbox" id="weather-switch">
                                 <span class="custom-slider">
                                     <span class="cloud">☁️<span class="label-text">Ver Clima</span></span> 
                                     <span class="sun">☀️</span> 
+=======
+                            <label class="custom-switch">
+                                <input type="checkbox" id="weather-switch">
+                                <span class="custom-slider">
+                                    <span class="cloud">☁️<span class="label-text">Ver Clima</span></span>
+                                    <span class="sun">☀️</span>
+>>>>>>> 6ac5817 (add calendar)
                                 </span>
                             </label>
                             <div class="weather-widget" id="weather" style="display: none;">
@@ -149,6 +281,7 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                     
                     </div>
                 </div>
@@ -274,19 +407,206 @@
                                     Dec, 11
                                 </p>
                             </div>
+=======
+
+
+                    <!-- INCIO DEL CALENDARIO -->
+
+                    <div class="cardsCalendario">
+                        <div class="calendar">
+
+                            <div class="calendar-header">
+                                <h2 id="monthAndYear"></h2>
+                            </div>
+                            <div class="calendar-controls">
+                                <button id="prevMonth">Anterior</button>
+                                <button id="nextMonth">Siguiente</button>
+                            </div>
+                            <div class="calendar-body">
+                                <div class="weekdays">
+                                    <div>Dom</div>
+                                    <div>Lun</div>
+                                    <div>Mar</div>
+                                    <div>Mié</div>
+                                    <div>Jue</div>
+                                    <div>Vie</div>
+                                    <div>Sáb</div>
+                                </div>
+                                <div class="days" id="calendarDays"></div>
+                            </div>
+                        </div>
+
+                        <!-- SECCION MUESTRA DE INFORMACION -->
+                        <div class="calendar">
+
+                          
+
+                            <div class="calendar-header">
+                                <div class="date">
+                                    <h2 id="day"></h2> <span class="time" id="current-date2"></span>
+                                </div>
+                                
+                                <p class="texto">Hay restricciones para placas terminadas en <span class="placa"></span>
+                                </p>
+                            </div>
+                            <div class="calendar-body">
+                                <p>Horario</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="messages-section">
+                <button class="messages-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x-circle">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <line x1="9" y1="9" x2="15" y2="15" />
+                    </svg>
+                </button>
+                <div class="projects-section-header">
+                    <p>Client Messages</p>
+                </div>
+                <div class="messages">
+                    <div class="message-box">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+                            alt="profile image">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <div class="name">Stephanie</div>
+                                <div class="star-checkbox">
+                                    <input type="checkbox" id="star-1">
+                                    <label for="star-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="message-line">
+                                I got your first assignment. It was quite good. We can continue with the next
+                                assignment.
+                            </p>
+                            <p class="message-line time">
+                                Dec, 12
+                            </p>
+                        </div>
+                    </div>
+                    <div class="message-box">
+                        <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+                            alt="profile image">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <div class="name">Mark</div>
+                                <div class="star-checkbox">
+                                    <input type="checkbox" id="star-2">
+                                    <label for="star-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="message-line">
+                                Hey, can tell me about progress of project? I'm waiting for your response.
+                            </p>
+                            <p class="message-line time">
+                                Dec, 12
+                            </p>
+                        </div>
+                    </div>
+                    <div class="message-box">
+                        <img src="https://images.unsplash.com/photo-1543965170-4c01a586684e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDZ8fG1hbnxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+                            alt="profile image">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <div class="name">David</div>
+                                <div class="star-checkbox">
+                                    <input type="checkbox" id="star-3">
+                                    <label for="star-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="message-line">
+                                Awesome! I like it. We can schedule a meeting for the next one.
+                            </p>
+                            <p class="message-line time">
+                                Dec, 12
+                            </p>
+                        </div>
+                    </div>
+                    <div class="message-box">
+                        <img src="https://images.unsplash.com/photo-1533993192821-2cce3a8267d1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWFuJTIwbW9kZXJufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+                            alt="profile image">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <div class="name">Jessica</div>
+                                <div class="star-checkbox">
+                                    <input type="checkbox" id="star-4">
+                                    <label for="star-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="message-line">
+                                I am really impressed! Can't wait to see the final result.
+                            </p>
+                            <p class="message-line time">
+                                Dec, 11
+                            </p>
+>>>>>>> 6ac5817 (add calendar)
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
         <script src="main.js"></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+=======
+    </div>
+
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+>>>>>>> 6ac5817 (add calendar)
 
 
 
 
 
+<<<<<<< HEAD
     </body>
 
     </html>
+=======
+</body>
+
+</html>
+>>>>>>> 6ac5817 (add calendar)
