@@ -40,85 +40,96 @@ document.getElementById('current-date').textContent = currentDate;
 // identificardor de la api kHjZGaXjSXiTYJOVQK9E
 
 //contraseña del clima: 981b94264e5a54fe9a8ab90332271550
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar el mapa
-    var map = L.map('map').setView([4.1433, -73.6376], 13); // Coordenadas de Villavicencio
-
-    // Capa de mapas de OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-    }).addTo(map);
-
-    // Marcador
-    L.marker([4.1433, -73.6376]).addTo(map)
-        .bindPopup('Un marcador en Villavicencio, Meta!')
-        .openPopup();
-
-    // Añadir capa de tráfico de HERE Maps
-    var apiKey = 'MD2rVWWIAbKQsDym4z0z9lNF0EECPkFvATkWSjJVhvA';
-    var trafficLayer = L.tileLayer(`https://traffic.ls.hereapi.com/traffic/6.2/flowtile/{z}/{x}/{y}/256/png8?apiKey=${apiKey}&ppi=72`, {
-        attribution: 'Datos de tráfico proporcionados por <a href="https://here.com">HERE</a>',
-        maxZoom: 19
+document.addEventListener('DOMContentLoaded', function () {
+    // Inicializar HERE Platform
+    var platform = new H.service.Platform({
+        apikey: 'MD2rVWWIAbKQsDym4z0z9lNF0EECPkFvATkWSjJVhvA'
     });
-    trafficLayer.addTo(map);
+    var defaultLayers = platform.createDefaultLayers();
 
-    // Llamada a la API del clima de OpenWeather
+    // Crear mapa y centrarlo en Villavicencio
+    var map = new H.Map(
+        document.getElementById('map'),
+        defaultLayers.vector.normal.map,
+        {
+            center: {lat: 4.1433, lng: -73.6376},
+            zoom: 13,
+            pixelRatio: window.devicePixelRatio || 1
+        }
+    );
+    window.addEventListener('resize', () => map.getViewPort().resize());
+
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+    // Cargar capa de tráfico
+    var trafficLayer = platform.getMapTileService({ type: 'traffic' });
+    trafficLayer = trafficLayer.createTileLayer('flow');
+    map.addLayer(trafficLayer);
+
+    // Función para calcular la ruta entre dos puntos
+    function calculateRouteFromAtoB() {
+        var router = platform.getRoutingService(null, 8);
+        var routeRequestParams = {
+            routingMode: 'fast',
+            transportMode: 'pedestrian',
+            origin: '4.1533,-73.6376',
+            destination: '4.1355,-73.6299',
+            return: 'polyline,turnByTurnActions,actions,instructions,travelSummary'
+        };
+
+        router.calculateRoute(routeRequestParams, onSuccess, onError);
+    }
+
+    function onSuccess(result) {
+        var route = result.routes[0];
+        addRouteShapeToMap(route);
+        addManueversToMap(route);
+    }
+
+    function onError(error) {
+        alert('No se pudo calcular la ruta');
+    }
+
+    function addRouteShapeToMap(route) {
+        route.sections.forEach((section) => {
+            let linestring = H.geo.LineString.fromFlexiblePolyline(section.polyline);
+            let polyline = new H.map.Polyline(linestring, {
+                style: { strokeColor: 'blue', lineWidth: 5 }
+            });
+            map.addObject(polyline);
+            map.getViewModel().setLookAtData({ bounds: polyline.getBoundingBox() });
+        });
+    }
+
+    function addManueversToMap(route) {
+        var group = new H.map.Group();
+        route.sections.forEach((section) => {
+            let actions = section.actions;
+            actions.forEach((action) => {
+                var marker = new H.map.Marker({ lat: action.position.lat, lng: action.position.lng });
+                group.addObject(marker);
+            });
+        });
+        map.addObject(group);
+    }
+
+    calculateRouteFromAtoB();
+
+    // Obtener datos del clima
     var weatherApiKey = '981b94264e5a54fe9a8ab90332271550'; 
     var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=4.1433&lon=-73.6376&units=metric&appid=${weatherApiKey}&lang=es`;
 
     fetch(weatherUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la solicitud: ' + response.status);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            // Guardar los datos del clima para usarlos en el switch
-            var weatherData = {
-                description: data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1),
-                temp: data.main.temp,
-                humidity: data.main.humidity,
-                wind: data.wind.speed
-            };
-
-            // Añadir evento change al switch
-            document.getElementById('weather-switch').addEventListener('change', function() {
-                var weatherWidget = document.getElementById('weather');
-                // Mostrar u ocultar el contenedor del clima según el estado del switch
-                weatherWidget.style.display = this.checked ? 'block' : 'none';
-
-                // Actualizar el contenido del clima solo cuando se muestra
-                if (this.checked) {
-                    document.getElementById('description').textContent = weatherData.description;
-                    document.getElementById('temp').textContent = weatherData.temp;
-                    document.getElementById('humidity').textContent = weatherData.humidity;
-                    document.getElementById('wind').textContent = weatherData.wind;
-                }
-
-                // Mover el sol y la nube según el estado del interruptor
-                var sun = document.querySelector('.sun');
-                var cloud = document.querySelector('.cloud');
-
-                if (this.checked) {
-                    sun.style.opacity = '1'; 
-                    sun.style.visibility = 'visible'; 
-                    cloud.style.opacity = '0'; 
-                    cloud.style.visibility = 'hidden'; 
-                } else {
-                    sun.style.opacity = '0'; 
-                    sun.style.visibility = 'hidden'; 
-                    cloud.style.opacity = '1'; 
-                    cloud.style.visibility = 'visible';
-                }
-            });
+            document.getElementById('description').textContent = data.weather[0].description;
+            document.getElementById('temp').textContent = data.main.temp;
+            document.getElementById('humidity').textContent = data.main.humidity;
+            document.getElementById('wind').textContent = data.wind.speed;
         })
-        .catch(error => {
-            console.error(error);
-            document.getElementById('description').textContent = 'Error al obtener el clima';
-        });
+        .catch(error => console.error('Error al obtener el clima:', error));
 });
-
 
 
 

@@ -130,25 +130,23 @@
                         </div>
                     </div>
                     <div class="container">
-                        <h1>Mapa de Villavicencio con tráfico y condiciones del clima</h1>
-                        <div id="map">
-                            <!-- Interruptor para mostrar el clima, dentro del mapa -->
-                            <label class="custom-switch" >
-                                <input type="checkbox" id="weather-switch">
-                                <span class="custom-slider">
-                                    <span class="cloud">☁️<span class="label-text">Ver Clima</span></span> 
-                                    <span class="sun">☀️</span> 
-                                </span>
-                            </label>
-                            <div class="weather-widget" id="weather" style="display: none;">
-                                <h2>Clima en Villavicencio</h2>
-                                <p id="description">Cargando...</p>
-                                <p><strong>Temperatura:</strong> <span id="temp">--</span> °C</p>
-                                <p><strong>Humedad:</strong> <span id="humidity">--</span>%</p>
-                                <p><strong>Viento:</strong> <span id="wind">--</span> m/s</p>
+                        <div class="content-wrapper">
+                            <div class="content-left">
+                                <h1>Mapa de Villavicencio con tráfico, clima y rutas</h1>
+                                <div class="weather-widget" id="weather">
+                                    <h2>Clima en Villavicencio</h2>
+                                    <p id="description">Cargando...</p>
+                                    <p><strong>Temperatura:</strong> <span id="temp">--</span> °C</p>
+                                    <p><strong>Humedad:</strong> <span id="humidity">--</span>%</p>
+                                    <p><strong>Viento:</strong> <span id="wind">--</span> m/s</p>
+                                </div>
+                            </div>
+                            <div class="content-right">
+                                <div id="map"></div>
                             </div>
                         </div>
                     </div>
+                    
                     
                     </div>
                 </div>
@@ -282,11 +280,12 @@
 
         <script src="main.js"></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-
-
-
-
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+        <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+        
     </body>
 
     </html>
