@@ -952,6 +952,8 @@ mark {
         #000 10% 90%,
         transparent
     );
+    margin-top: 20px;
+    margin-bottom: 70px;
 }
 .slider .list{
     display: flex;
