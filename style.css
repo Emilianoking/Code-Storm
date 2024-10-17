@@ -1231,6 +1231,11 @@ th {
 
 .select-btn .icon-arrow{
     font-size: 25px;
+    transition: 1s;
+}
+
+.select-btn.active .icon-arrow {
+    transform: rotate(180deg);
 }
 
 .select-category .list{
@@ -1248,6 +1253,9 @@ th {
     background: #fff; /*revisar para la opción dark*/
     padding: 0 16px;
     cursor: pointer;
+    transform-origin: top;
+    transform: scale(0) translateY(-65px);
+    margin-bottom: -55px; /*revisar*/
 }
 
 .list .option:hover {
@@ -1264,12 +1272,13 @@ th {
     border-bottom-right-radius: 8px;
 }
 
-.option .icon {
+.option .icon-select {
    font-size: 25px;
    margin-right: 12px; 
 }
 
 .option .option-text {
     font-size: 18px;
+    color: #333; /*revisar*/
 }
 
