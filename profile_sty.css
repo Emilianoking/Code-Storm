@@ -959,16 +959,17 @@ textarea {
 }
 
 .container {
-  position: relative;
-  margin-top: -50px;
-  width: 100%;
-  min-height: 100vh;
-  padding: 2rem;
-  background-color: #fafafa;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    width: 100%;
+    padding: 32px;
+    border-radius: 32px; 
+    background-color: var(--projects-section);
+    overflow: hidden;
+    max-height: 900px; 
+    max-height: auto; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .form {
@@ -1278,6 +1279,7 @@ textarea.input-veh {
   position: absolute;
   width: 500px;
   height: 500px;
+  background-color: var(--projects-section);
   border-radius: 50%;
   background: linear-gradient(to bottom, #c3cff4, #146292);
   bottom: 50%;

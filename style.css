@@ -293,7 +293,7 @@ mark {
     border-radius: 32px; 
     padding: 32px; 
     overflow: auto;
-    max-height: 500px; 
+    max-height: 1200px; 
     max-height: auto; 
     display: flex; 
     flex-direction: column; 
@@ -1108,6 +1108,11 @@ th {
 
 
 /* CALENDAR SECCION */
+
+.titleCalendario{
+    margin-top: 70px;
+    margin-bottom: 40px;
+}
 
 .cardsCalendario{
     display: flex;
