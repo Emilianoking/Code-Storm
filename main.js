@@ -220,64 +220,40 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error al obtener el clima:', error));
 });
 
-// Barra de busqueda
-document.getElementById("search-input").addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase().trim();
-  const projectSection = document.querySelector(".projects-section");
-  const elementsToSearch = projectSection.querySelectorAll("p, h1, h2");
+          
+// Barra de búsqueda
+document.getElementById('search-input').addEventListener('input', function() { 
+  const searchValue = this.value.toLowerCase().trim();  
+  const projectSection = document.querySelector('.projects-section');  
+  const elementsToSearch = projectSection.querySelectorAll('p, h1, h2'); 
 
   // Variable para guardar la primera coincidencia
   let firstMatch = null;
 
-//brayan
-  elementsToSearch.forEach((element) => {
-    const originalText = element.textContent;
-    element.innerHTML = originalText;
+  elementsToSearch.forEach(element => {
+      const originalText = element.textContent; 
+      element.innerHTML = originalText; 
 
-    if (searchValue !== "") {
-      const regex = new RegExp(`(${searchValue})`, "gi");
-      const highlightedText = originalText.replace(regex, "<mark>$1</mark>");
-      element.innerHTML = highlightedText;
+      if (searchValue !== '') {
+          const regex = new RegExp(`(${searchValue})`, 'gi');  
+          const highlightedText = originalText.replace(regex, '<mark>$1</mark>');  
+          element.innerHTML = highlightedText; 
 
-      // Comprobar si hay coincidencias
-      if (highlightedText.includes("<mark>")) {
-        if (!firstMatch) {
-          firstMatch = element;
-
-          
-// Barra de busqueda
-document.getElementById('search-input').addEventListener('input', function() { 
-    const searchValue = this.value.toLowerCase().trim();  
-    const projectSection = document.querySelector('.projects-section');  
-    const elementsToSearch = projectSection.querySelectorAll('p, h1, h2'); 
-
-    // Variable para guardar la primera coincidencia
-    let firstMatch = null;
-
-    elementsToSearch.forEach(element => {
-        const originalText = element.textContent; 
-        element.innerHTML = originalText; 
-
-        if (searchValue !== '') {
-            const regex = new RegExp(`(${searchValue})`, 'gi');  
-            const highlightedText = originalText.replace(regex, '<mark>$1</mark>');  
-            element.innerHTML = highlightedText; 
-
-            // Comprobar si hay coincidencias
-            if (highlightedText.includes('<mark>')) {
-                if (!firstMatch) {
-                    firstMatch = element; 
-                }
-            }
-
-        }
+          // Comprobar si hay coincidencias
+          if (highlightedText.includes('<mark>')) {
+              if (!firstMatch) {
+                  firstMatch = element; 
+              }
+          }
       }
-    }
   });
+
+  // Mover la vista hacia la primera coincidencia, si existe
   if (firstMatch) {
-    firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
+
 
 /* SECCION CALENDARIO */
 
@@ -431,3 +407,4 @@ nextMonthBtn.addEventListener("click", () => {
 // Inicializar el calendario y seleccionar el día actual
 renderCalendar(currentMonth, currentYear);
 selectToday(); // Llamar a la función para seleccionar el día actual
+});
