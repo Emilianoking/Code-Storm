@@ -420,7 +420,8 @@ selectBtn.addEventListener('click', function(){
 });
 
 for(options of option){
-    option.onclick = function() {
+    options.onclick = function() {
         text.innerHTML = this.textContent;
+        selectBtn.classList.remove('active');
     }
 }

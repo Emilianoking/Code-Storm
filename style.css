@@ -1209,13 +1209,11 @@ th {
 }
 
 /*BARRA DESPLEGABLE*/
-
 .select-category {
-    width: 380px;
+    margin-bottom: 40px;
 }
 
 .select-category .select-btn {
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1229,7 +1227,7 @@ th {
     box-shadow: 0 0 5px rgba(0, 0, 0, .1);
 }
 
-.select-btn .icon-arrow{
+.select-btn .icon-arrow {
     font-size: 25px;
     transition: 1s;
 }
@@ -1238,14 +1236,14 @@ th {
     transform: rotate(180deg);
 }
 
-.select-category .list{
+.select-category .list {
     position: absolute;
-    width: 380px;
-    transform: translateY(-140px);
+    width: 100%; /* Cambiado para adaptarse al contenedor */
     margin-top: 10px;
+    display: none; /* Ocultar inicialmente */
 }
 
-.list .option{
+.list .option {
     display: flex;
     align-items: center;
     width: 100%;
@@ -1254,8 +1252,11 @@ th {
     padding: 0 16px;
     cursor: pointer;
     transform-origin: top;
+    opacity: 0;
     transform: scale(0) translateY(-65px);
     margin-bottom: -55px; /*revisar*/
+    transition: opacity .5s ease-in-out, transform .5s ease-in-out, margin-bottom .2s ease-in-out;
+    transition-delay: calc(.1s * var(--i));
 }
 
 .list .option:hover {
@@ -1272,9 +1273,9 @@ th {
     border-bottom-right-radius: 8px;
 }
 
-.option .icon-select {
-   font-size: 25px;
-   margin-right: 12px; 
+.option .icon {
+    font-size: 25px;
+    margin-right: 12px;
 }
 
 .option .option-text {
@@ -1282,3 +1283,8 @@ th {
     color: #333; /*revisar*/
 }
 
+.select-btn.active + .list .option {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    margin-bottom: 0;
+}
