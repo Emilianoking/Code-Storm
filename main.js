@@ -312,9 +312,9 @@ const weekdays = [
 const horarios = {
   Lunes: "9 - 0",
   Martes: "1 - 2",
-  Miércoles: "1 - 2",
-  Jueves: "1 - 2",
-  Viernes: "1 - 2",
+  Miércoles: "3 - 4",
+  Jueves: "5 - 6",
+  Viernes: "7 - 8",
   Sábado: "No aplica",
   Domingo: "No aplica",
 };
