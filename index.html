@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Strom</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!--ICONS SELECT-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -154,6 +156,31 @@
 
                     <h2 class="titleCalendario">Calendario Restricción Pico y Placa</h2>
 
+                    <div class="select-category">
+                        <div class="select-btn" id="select-btn">
+                            <span id="text">Seleccionar categoría de vehículo:</span>   
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+
+                        <ul class="list">
+                            <li class="option" style="--i:4;">
+                                <i class="fa-solid fa-car" class="icon-select"></i>
+                                <span class="option-text">Particular</span>
+                            </li>
+                            <li class="option" style="--i:3;">
+                                <i class="fa-solid fa-motorcycle" class="icon-select"></i>
+                                <span class="option-text">Moto</span>
+                            </li>
+                            <li class="option" style="--i:2;">
+                                <i class="fa-solid fa-taxi" class="icon-select"></i>
+                                <span class="option-text">Taxi</span>
+                            </li>
+                            <li class="option" style="--i:1;">
+                                <i class="fa-solid fa-truck" class="icon-select"></i>
+                                <span class="option-text">Transporte de Carga</span>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="vehicle-category-selector">
                         <label for="vehicleCategory">Seleccionar categoría de vehículo:</label>
                         <select id="vehicleCategory" class="vehicle-category">
