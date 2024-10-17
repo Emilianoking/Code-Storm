@@ -408,3 +408,19 @@ nextMonthBtn.addEventListener("click", () => {
 renderCalendar(currentMonth, currentYear);
 selectToday(); // Llamar a la función para seleccionar el día actual
 });
+
+//Select from calendar (Select del calendario)
+
+const selectBtn = document.getElementById('select-btn');
+const text = document.getElementById('text');
+const option = document.getElementsByClassName('option');
+
+selectBtn.addEventListener('click', function(){
+    selectBtn.classList.toggle('active');
+});
+
+for(options of option){
+    option.onclick = function() {
+        text.innerHTML = this.textContent;
+    }
+}
