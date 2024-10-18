@@ -644,3 +644,4 @@ function updateRestrictions(selectedDate) {
 // Inicializar el calendario y seleccionar el día actual
 renderCalendar(currentMonth, currentYear);
 selectToday(); // Llamar a la función para seleccionar el día actual
+}
