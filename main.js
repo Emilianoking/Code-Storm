@@ -257,8 +257,226 @@ document.getElementById('search-input').addEventListener('input', function() {
 
 /* SECCION CALENDARIO */
 
-/*SECCION UTILIZADA PARA LA FECHA ENCIMA DE LAS IMAGENES */
+const currentDate = new Date();
+const day = String(currentDate.getDate()).padStart(2, "0");
+const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+const year = currentDate.getFullYear();
+const formattedDate = `${day}/${month}/${year}`;
 
+document.getElementById("current-date2").textContent = formattedDate;
+
+const calendarDays = document.getElementById("calendarDays");
+const monthAndYear = document.getElementById("monthAndYear");
+const prevMonthBtn = document.getElementById("prevMonth");
+const nextMonthBtn = document.getElementById("nextMonth");
+const placaElement = document.querySelector(".placa");
+const dayElement = document.getElementById("day");
+
+const today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+let selectedDayElement = null;
+
+const months = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+];
+
+const weekdays = [
+    "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado",
+];
+
+// Restricciones y horarios
+const restrictions = {
+    particular: {
+        lunes: "9-0",
+        martes: "1-2",
+        miercoles: "3-4",
+        jueves: "5-6",
+        viernes: "7-8",
+        sabado: "No aplica",
+        domingo: "No aplica",
+        horario: {
+            mañana: "6:30am a 9:30am",
+            tarde: "5:00pm a 8:00pm"
+        }
+    },
+    moto: {
+        restriccion: "No aplica",
+        parrillero: "5:00pm a 9:00pm"
+    },
+    camion: {
+        lunes: "Todos",
+        martes: "Todos",
+        miercoles: "Todos",
+        jueves: "Todos",
+        viernes: "Todos",
+        sabado: "Todos",
+        domingo: "Todos",
+        horario: {
+            mañana: "6:00am a 8:00am",
+            tarde: "5:00pm a 7:30pm"
+        }
+    },
+    taxi: {
+        horario: {
+            mañana: "6:00am a 9:00am",
+            tarde: "5:00pm a 8:00pm"
+        }
+    }
+};
+
+// Mapeo de horarios
+const horarios = {
+    Lunes: "9 - 0",
+    Martes: "1 - 2",
+    Miércoles: "3 - 4",
+    Jueves: "5 - 6",
+    Viernes: "7 - 8",
+    Sábado: "No aplica",
+    Domingo: "No aplica",
+};
+
+// Función para mostrar el día actual y su horario
+function showDayInfo(selectedDate) {
+    const dayOfWeek = weekdays[selectedDate.getDay()].toLowerCase();
+    const day = selectedDate.getDate();
+    const month = months[selectedDate.getMonth()];
+    const year = selectedDate.getFullYear();
+
+    const formattedDate = ` ${day} de ${month} del ${year}`;
+    document.getElementById("current-date2").textContent = formattedDate;
+    dayElement.textContent = weekdays[selectedDate.getDay()]; // Actualizar el día en letras
+
+    // Actualizar la placa (horario) según el día seleccionado
+    const category = document.getElementById("category").value;
+
+    if (category === "taxi") {
+        const taxiRestriction = getTaxiPlateRestriction(selectedDate);
+        placaElement.textContent = `Restricción de placa terminada en: ${taxiRestriction || "No aplica"}`;
+    } else {
+        placaElement.textContent = restrictions[category][dayOfWeek] || "No aplica";
+    }
+
+    updateRestrictions(selectedDate); // Actualizar las restricciones en función de la categoría seleccionada
+}
+
+// Función para seleccionar automáticamente el día actual
+function selectToday() {
+    renderCalendar(currentMonth, currentYear); // Renderizar el calendario actual
+
+    const dayCells = document.querySelectorAll(".calendar-body .days div");
+    dayCells.forEach((dayCell) => {
+        if (dayCell.textContent == today.getDate()) {
+            dayCell.classList.add("selected");
+            selectedDayElement = dayCell;
+        }
+    });
+
+    showDayInfo(today); // Mostrar la información del día actual
+}
+
+// Función para renderizar el calendario
+function renderCalendar(month, year) {
+    const firstDay = new Date(year, month).getDay();
+    const daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+    calendarDays.innerHTML = "";
+    monthAndYear.textContent = `${months[month]} ${year}`;
+
+    for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement("div");
+        calendarDays.appendChild(emptyCell);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement("div");
+        dayCell.textContent = day;
+
+        // Marcar el día actual
+        if (
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ) {
+            dayCell.classList.add("today");
+        }
+
+        // Agregar evento para seleccionar el día
+        dayCell.addEventListener("click", function () {
+            if (selectedDayElement) {
+                selectedDayElement.classList.remove("selected");
+            }
+            dayCell.classList.add("selected");
+            selectedDayElement = dayCell; // Actualizar el día seleccionado
+
+            // Crear una nueva fecha basada en el día seleccionado
+            const selectedDate = new Date(year, month, day);
+            showDayInfo(selectedDate); // Actualizar la información del día seleccionado
+        });
+
+        calendarDays.appendChild(dayCell);
+    }
+}
+
+prevMonthBtn.addEventListener("click", () => {
+    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
+    renderCalendar(currentMonth, currentYear);
+});
+
+nextMonthBtn.addEventListener("click", () => {
+    currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+    currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
+    renderCalendar(currentMonth, currentYear);
+});
+
+// Función para actualizar restricciones
+function updateRestrictions(selectedDate) {
+    const category = document.getElementById("category").value;
+    const dayOfWeek = weekdays[selectedDate.getDay()].toLowerCase();
+
+    // Mostrar restricciones basadas en la categoría
+    let restrictionText = '';
+    if (category === 'taxi') {
+        const taxiRestriction = getTaxiPlateRestriction(selectedDate);
+        restrictionText = taxiRestriction ? `Restricción de placa terminada en: ${taxiRestriction}` : 'No aplica';
+    } else {
+        restrictionText = restrictions[category][dayOfWeek] || 'No aplica';
+    }
+
+    document.getElementById("restriction-info").textContent = restrictionText;
+}
+
+// Función para obtener la restricción de taxi
+function getTaxiPlateRestriction(selectedDate) {
+    const dayOfWeek = weekdays[selectedDate.getDay()].toLowerCase();
+    const taxiRestrictions = {
+        'lunes': '1, 2',
+        'martes': '3, 4',
+        'miercoles': '5, 6',
+        'jueves': '7, 8',
+        'viernes': '9, 0',
+        'sabado': 'No aplica',
+        'domingo': 'No aplica',
+    };
+    return taxiRestrictions[dayOfWeek];
+}
+
+// Inicializar el calendario y seleccionar el día actual
+renderCalendar(currentMonth, currentYear);
+selectToday();
+});
+
+
+
+
+
+
+
+/* SECCION CALENDARIO */
+
+/* SECCION UTILIZADA PARA LA FECHA ENCIMA DE LAS IMAGENES */
 const currentDate = new Date();
 const day = String(currentDate.getDate()).padStart(2, "0"); // Asegura que siempre tenga 2 dígitos
 const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Los meses en JavaScript van de 0 a 11
@@ -266,10 +484,9 @@ const year = currentDate.getFullYear();
 
 // Formato personalizado: dd-mm-yyyy
 const formattedDate = `${day}/${month}/${year}`;
-
 document.getElementById("current-date").textContent = formattedDate;
 
-/*SECCION PARA EL CALENDARIO Y BOTONES */
+/* SECCION PARA EL CALENDARIO Y BOTONES */
 const calendarDays = document.getElementById("calendarDays");
 const monthAndYear = document.getElementById("monthAndYear");
 const prevMonthBtn = document.getElementById("prevMonth");
@@ -284,127 +501,146 @@ let currentYear = today.getFullYear();
 let selectedDayElement = null; // Almacena el día seleccionado
 
 const months = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
 
 const weekdays = [
-  "Domingo",
-  "Lunes",
-  "Martes",
-  "Miércoles",
-  "Jueves",
-  "Viernes",
-  "Sábado",
+    "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"
 ];
 
-// Mapeo de horarios y restricciones de placas
-const horarios = {
-  Lunes: "9 - 0",
-  Martes: "1 - 2",
-  Miércoles: "3 - 4",
-  Jueves: "5 - 6",
-  Viernes: "7 - 8",
-  Sábado: "No aplica",
-  Domingo: "No aplica",
+// Restricciones por categoría
+const restrictions = {
+    particular: {
+        lunes: "9-0",
+        martes: "1-2",
+        miercoles: "3-4",
+        jueves: "5-6",
+        viernes: "7-8",
+        sabado: "No aplica",
+        domingo: "No aplica",
+        horario: {
+            mañana: "6:30am a 9:30am",
+            tarde: "5:00pm a 8:00pm"
+        }
+    },
+    moto: {
+        restriccion: "No aplica",
+        parrillero: "5:00pm a 9:00pm"
+    },
+    camion: {
+        lunes: "Todos",
+        martes: "Todos",
+        miercoles: "Todos",
+        jueves: "Todos",
+        viernes: "Todos",
+        sabado: "Todos",
+        domingo: "Todos",
+        horario: {
+            mañana: "6:00am a 8:00am",
+            tarde: "5:00pm a 7:30pm"
+        }
+    },
+    taxi: {
+        horario: {
+            mañana: "6:00am a 9:00am",
+            tarde: "5:00pm a 8:00pm"
+        }
+    }
 };
 
 // Función para mostrar el día actual y su horario
 function showDayInfo(selectedDate) {
-  const dayOfWeek = weekdays[selectedDate.getDay()];
-  const day = selectedDate.getDate();
-  const month = months[selectedDate.getMonth()];
-  const year = selectedDate.getFullYear();
+    const dayOfWeek = weekdays[selectedDate.getDay()];
+    const day = selectedDate.getDate();
+    const month = months[selectedDate.getMonth()];
+    const year = selectedDate.getFullYear();
 
-  const formattedDate = ` ${day} de ${month} del ${year}`;
-  currentDateDisplay.textContent = formattedDate; // Actualizar la etiqueta con el formato de fecha
-  dayElement.textContent = dayOfWeek; // Actualizar el día en letras
+    const formattedDate = `${day} de ${month} del ${year}`;
+    currentDateDisplay.textContent = formattedDate; // Actualizar la etiqueta con el formato de fecha
+    dayElement.textContent = dayOfWeek; // Actualizar el día en letras
 
-  // Actualizar la placa (horario) según el día seleccionado
-  placaElement.textContent = horarios[dayOfWeek] || "No aplica";
+    // Actualizar la placa (horario) según el día seleccionado
+    placaElement.textContent = restrictions.particular[dayOfWeek] || "No aplica";
 }
 
 // Función para seleccionar automáticamente el día actual
 function selectToday() {
-  renderCalendar(currentMonth, currentYear); // Renderizar el calendario actual
+    renderCalendar(currentMonth, currentYear); // Renderizar el calendario actual
 
-  const dayCells = document.querySelectorAll(".calendar-body .days div");
-  dayCells.forEach((dayCell) => {
-    if (dayCell.textContent == today.getDate()) {
-      dayCell.classList.add("selected");
-      selectedDayElement = dayCell;
-    }
-  });
+    const dayCells = document.querySelectorAll(".calendar-body .days div");
+    dayCells.forEach((dayCell) => {
+        if (dayCell.textContent == today.getDate()) {
+            dayCell.classList.add("selected");
+            selectedDayElement = dayCell;
+        }
+    });
 
-  showDayInfo(today); // Mostrar la información del día actual
+    showDayInfo(today); // Mostrar la información del día actual
 }
 
 // Función para renderizar el calendario
 function renderCalendar(month, year) {
-  const firstDay = new Date(year, month).getDay();
-  const daysInMonth = 32 - new Date(year, month, 32).getDate();
+    const firstDay = new Date(year, month).getDay();
+    const daysInMonth = 32 - new Date(year, month, 32).getDate();
 
-  calendarDays.innerHTML = "";
-  monthAndYear.textContent = `${months[month]} ${year}`;
+    calendarDays.innerHTML = "";
+    monthAndYear.textContent = `${months[month]} ${year}`;
 
-  for (let i = 0; i < firstDay; i++) {
-    const emptyCell = document.createElement("div");
-    calendarDays.appendChild(emptyCell);
-  }
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dayCell = document.createElement("div");
-    dayCell.textContent = day;
-
-    // Marcar el día actual
-    if (
-      day === today.getDate() &&
-      month === today.getMonth() &&
-      year === today.getFullYear()
-    ) {
-      dayCell.classList.add("today");
+    for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement("div");
+        calendarDays.appendChild(emptyCell);
     }
 
-    // Agregar evento para seleccionar el día
-    dayCell.addEventListener("click", function () {
-      if (selectedDayElement) {
-        selectedDayElement.classList.remove("selected");
-      }
-      dayCell.classList.add("selected");
-      selectedDayElement = dayCell; // Actualizar el día seleccionado
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement("div");
+        dayCell.textContent = day;
 
-      // Crear una nueva fecha basada en el día seleccionado
-      const selectedDate = new Date(year, month, day);
-      showDayInfo(selectedDate); // Actualizar la información del día seleccionado
-    });
+        // Marcar el día actual
+        if (
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ) {
+            dayCell.classList.add("today");
+        }
 
-    calendarDays.appendChild(dayCell);
-  }
+        // Agregar evento para seleccionar el día
+        dayCell.addEventListener("click", function () {
+            if (selectedDayElement) {
+                selectedDayElement.classList.remove("selected");
+            }
+            dayCell.classList.add("selected");
+            selectedDayElement = dayCell; // Actualizar el día seleccionado
+
+            // Crear una nueva fecha basada en el día seleccionado
+            const selectedDate = new Date(year, month, day);
+            showDayInfo(selectedDate); // Actualizar la información del día seleccionado
+            updateRestrictions(selectedDate); // Actualizar restricciones según el día seleccionado
+        });
+
+        calendarDays.appendChild(dayCell);
+    }
 }
 
 prevMonthBtn.addEventListener("click", () => {
-  currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-  currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
-  renderCalendar(currentMonth, currentYear);
+    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
+    renderCalendar(currentMonth, currentYear);
 });
 
 nextMonthBtn.addEventListener("click", () => {
-  currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-  currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
-  renderCalendar(currentMonth, currentYear);
+    currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+    currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
+    renderCalendar(currentMonth, currentYear);
 });
+
+// Función para actualizar restricciones
+function updateRestrictions(selectedDate) {
+    const category = document.getElementById("category").value;
+    const dayOfWeek = weekdays[selectedDate.getDay()].toLowerCase();
+
 
 // Inicializar el calendario y seleccionar el día actual
 renderCalendar(currentMonth, currentYear);
 selectToday(); // Llamar a la función para seleccionar el día actual
-});

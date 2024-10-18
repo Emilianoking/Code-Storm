@@ -154,8 +154,19 @@
                    
                     <!-- INCIO DEL CALENDARIO -->
 
-                        <h2 class="titleCalendario">Calendario Restricción Pico y Placa</h2>
-
+                    <div class="info-container">
+                        <h2>Restricciones de Pico y Placa</h2>
+                        <label for="category">Seleccione categoría:</label>
+                        <select id="category" onchange="updateRestrictions()">
+                            <option value="particular">Particular</option>
+                            <option value="moto">Moto</option>
+                            <option value="taxi">Taxi</option>
+                            <option value="camion">Camión</option>
+                        </select>
+                        <div id="restriction-info"></div>
+                        <div id="countdown"></div>
+                    </div>
+                    
                     
                     <div class="cardsCalendario">
                         <div class="calendar">
