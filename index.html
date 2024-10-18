@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Strom</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!--ICONS SELECT-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,10 +21,9 @@
                 <span class="app-icon"></span>
                 <p class="app-name">Code Storm</p>
                 <div class="search-wrapper">
-                    <input class="search-input" type="text" placeholder="Buscar">
+                    <input id="search-input" class="search-input" type="text" placeholder="Buscar">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
-                        <defs></defs>
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="M21 21l-4.35-4.35"></path>
                     </svg>
@@ -80,12 +82,12 @@
                         <polyline points="9 22 9 12 15 12 15 22" />
                     </svg>
                 </a>
-                <a href="" class="app-sidebar-link">
+                <a href="profile.html" class="app-sidebar-link">
                     <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        class="feather feather-pie-chart" viewBox="0 0 24 24">
-                        <defs />
-                        <path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
+                        class="feather feather-user" viewBox="0 0 24 24">
+                        <path
+                            d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5z" />
                     </svg>
                 </a>
                 <a href="" class="app-sidebar-link">
@@ -117,34 +119,106 @@
                     <p class="time" id="current-date"></p>
                 </div>
                 <!-------- CARRUSEL --------->
-                <div class="slider" reverse="true" style="
-                 --width: 400px;
-                 --height: 400px; /* Asegúrate de que el height sea más razonable */
-                 --quantity: 6;
-                 ">
-                    <div class="list">
-                        <div class="item" style="--position: 1"><img src="images/slider1_1.png" alt=""></div>
-                        <div class="item" style="--position: 2"><img src="images/slider1_2.png" alt=""></div>
-                        <div class="item" style="--position: 3"><img src="images/slider1_3.png" alt=""></div>
-                        <div class="item" style="--position: 4"><img src="images/slider1_4.png" alt=""></div>
-                        <div class="item" style="--position: 5"><img src="images/slider1_5.png" alt=""></div>
-                        <div class="item" style="--position: 6"><img src="images/slider1_6.png" alt=""></div>
+                <div class="project-boxes jsGridView">
+                    <h2>Movilidad Villavicencio</h2>
+                    <div class="slider" reverse="true" style="
+                        --width: 400px;
+                        --height: 400px; /* Asegúrate de que el height sea más razonable */
+                        --quantity: 6;">
+                        <div class="list">
+                            <div class="item" style="--position: 1"><img src="images/slider1_1.png" alt=""></div>
+                            <div class="item" style="--position: 2"><img src="images/slider1_2.jpg" alt=""></div>
+                            <div class="item" style="--position: 3"><img src="images/slider1_3.jpg" alt=""></div>
+                            <div class="item" style="--position: 4"><img src="images/slider1_4.jpeg" alt=""></div>
+                            <div class="item" style="--position: 5"><img src="images/slider1_5.jpeg" alt=""></div>
+                            <div class="item" style="--position: 6"><img src="images/slider1_6.jpeg" alt=""></div>
+                        </div>
                     </div>
-                </div>
-                <div class="container">
-                    <h1>Mapa de Villavicencio con tráfico y condiciones del clima</h1>
-                    <div id="map"></div>
-                    <div class="weather-widget" id="weather">
-                        <h2>Clima en Villavicencio</h2>
-                        <p id="description">Cargando...</p>
-                        <p><strong>Temperatura:</strong> <span id="temp">--</span> °C</p>
-                        <p><strong>Humedad:</strong> <span id="humidity">--</span>%</p>
-                        <p><strong>Viento:</strong> <span id="wind">--</span> m/s</p>
+                    <div class="container">
+                        <div class="content-wrapper">
+                            <div class="content-left">
+                                <h1>Mapa de Villavicencio con tráfico, clima y rutas</h1>
+                                <div class="weather-widget" id="weather">
+                                    <h2>Clima en Villavicencio</h2>
+                                    <p id="description">Cargando...</p>
+                                    <p><strong>Temperatura:</strong> <span id="temp">--</span> °C</p>
+                                    <p><strong>Humedad:</strong> <span id="humidity">--</span>%</p>
+                                    <p><strong>Viento:</strong> <span id="wind">--</span> m/s</p>
+                                </div>
+                            </div>
+                            <div class="content-right">
+                                <div id="map"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                   
+                    <!-- INCIO DEL CALENDARIO -->
 
-            <!--FIN DEL CONTENEDOR IZQUIERDO-->
+                    <div class="info-container">
+                        <h2>Restricciones de Pico y Placa</h2>
+                        <label for="category">Seleccione categoría:</label>
+                        <select id="category" onchange="updateRestrictions()">
+                            <option value="particular">Particular</option>
+                            <option value="moto">Moto</option>
+                            <option value="taxi">Taxi</option>
+                            <option value="camion">Camión</option>
+                        </select>
+                        <div id="restriction-info"></div>
+                        <div id="countdown"></div>
+                    </div>
+                    
+                    
+                    <div class="cardsCalendario">
+                        <div class="calendar">
+
+                            <div class="calendar-header">
+                                <h2 id="monthAndYear"></h2>
+                            </div>
+                            <div class="calendar-controls">
+                                <button id="prevMonth">Anterior</button>
+                                <button id="nextMonth">Siguiente</button>
+                            </div>
+                            <div class="calendar-body">
+                                <div class="weekdays">
+                                    <div>Dom</div>
+                                    <div>Lun</div>
+                                    <div>Mar</div>
+                                    <div>Mié</div>
+                                    <div>Jue</div>
+                                    <div>Vie</div>
+                                    <div>Sáb</div>
+                                </div>
+                                <div class="days" id="calendarDays"></div>
+                            </div>
+                        </div>
+
+                        <!-- SECCION MUESTRA DE INFORMACION -->
+                        <div class="calendar">
+
+                          
+
+                            <div class="calendar-header">
+                                <div class="date">
+                                    <h2 id="day"></h2> <span class="time" id="current-date2"></span>
+                                </div>
+                                
+                                <p class="texto">Hay restricciones para placas terminadas en <span class="placa"></span>
+                                </p>
+                            </div>
+                            <div class="calendar-body">
+                                <p>Horario</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
+                    </div>
+                </div>
+                
+
+
+
 
 
             <div class="messages-section">
@@ -274,6 +348,14 @@
     <script src="main.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+        <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
 </body>
 
 </html>
+
